@@ -1,6 +1,16 @@
+<div class="container">
 <% @tweets.each do |t| %>
-<%= t.user.photo %>
-<%= t.content %>
+<div class="row text-center m-auto">
+<div class="col-8">
+<div class="row">
+<div class="col-md-6"><%= image_tag t.user.photo, class: 'img-fluid' %></div>
+<div class="col-md-6"><h1><%= t.user.name %> </h1>
+<p><%= t.content %></p>
 <%= link_to 'Retweet', retweet_tweet_path(t.id), data: {confirm: '¿Seguro que desea retweetear?', method: :post} %>
-<%= t.retweets %>
-<% end %>
+<span><%= t.retweets %></span></div>
+  <%= link_to "Listo", tweet_likes_path(t), method: :post, class: 'btn btn-primary' %>
+<% t.likes %>
+</div>
+</div>
+</div>
+<% end %></div>

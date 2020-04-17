@@ -8,6 +8,13 @@ class TweetsController < ApplicationController
     #User.find(params[:user_id]).id
   end
 
+
+    def show
+      @tweet = Tweet.find(params[:id])
+      @top_five = Like.all.where(tweet_id: @tweet).order(:created_at).limit(5).pluck('user_id')
+      @likes_users_id = Like.all.where(tweet_id: @tweet).pluck('user_id')
+    end
+
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
@@ -35,6 +42,7 @@ class TweetsController < ApplicationController
   end
 
   private
+
   def set_tweet
     @tweet = Tweet.find(params[:id])
   end
